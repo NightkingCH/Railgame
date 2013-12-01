@@ -2,8 +2,8 @@
 
     var game = global.game = {
         core: global.core,
-        run: function () {
-            global.core.start();
+        run: function (options) {
+            global.core.start(options);
         }
     };
 }(this));
