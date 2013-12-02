@@ -86,6 +86,9 @@
 			return gameObject;
 		},
 		removeGameObject: function(gameObject){
+			if(!gameObject)
+				return false;
+		
 			if(!gameObject.uid)
 				return false;
 				

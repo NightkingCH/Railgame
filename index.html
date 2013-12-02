@@ -13,7 +13,12 @@
 </head>
 
 <body>
-    <canvas id="game" width="1024" height="768"></canvas>
+	<div>
+		<button type="button" onclick="game.removeActiveBox();">Remove Me</button>
+	</div>
+	<div>
+		<canvas id="game" width="1024" height="768"></canvas>
+	</div>
     <script>
         game.run();
     </script>

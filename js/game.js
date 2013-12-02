@@ -49,6 +49,9 @@
 		 if(game.activeBox.uid === gameObject.uid)
 			game.activeBox = null;
 		},
+		removeActiveBox: function(){
+			game.core.removeGameObject(game.activeBox);
+		}
     };
     
     game.core.eventAggregator.subscribe(game.core.events.start, game.start);
