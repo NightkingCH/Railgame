@@ -74,11 +74,53 @@
         stop: function () {
             core.exit = true;
         },
+		instancedGameObjects: [],
 		getInstanceOf: function(ctor){
 			var gameObject =  new ctor();
+			gameObject.uid = core.getGuid();
+
 			gameObject.start();
 			
+			core.instancedGameObjects.push(gameObject);
+			
 			return gameObject;
+		},
+		removeGameObject: function(gameObject){
+			if(!gameObject.uid)
+				return false;
+				
+			var index = -1;	
+		
+			for (var i = 0; i < core.instancedGameObjects.length; ++i) {
+				if(core.instancedGameObjects[i].uid !==  gameObject.uid)
+					continue;
+					
+					index = i;
+				break;	
+			}
+			
+			if(index === -1)
+				return false;
+				
+			core.instancedGameObjects.splice(index, 1);
+			
+			core.eventAggregator.publish(core.events.gameObjectRemoved, core, gameObject);
+			
+			if(gameObject.stop)
+				gameObject.stop();
+				
+			gameObject = null;
+			
+			delete gameObject;
+			
+			return true;
+		},
+		//nice solution: http://stackoverflow.com/a/2117523
+		getGuid: function(){
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+				var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+				return v.toString(16);
+			});
 		},
     };
 }(this));

@@ -3,5 +3,8 @@
         currentPosititon: function(){
 			return null; //TODO
 		},
+		getLastClickPosititon: function(){
+			return null; //TODO
+		},
     };
 }(this));

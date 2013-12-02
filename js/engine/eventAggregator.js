@@ -123,7 +123,8 @@
         draw: "draw",
         afterDraw: "afterDraw",
         lateUpdate: "lateUpdate",
-        stop: "stop"
+        stop: "stop",
+		gameObjectRemoved: "gameObjectRemoved",
     };
 
 }(this));

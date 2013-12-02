@@ -23,6 +23,9 @@
         },
         moveLeft: function (event) {
             event = event || window.event;
+			
+			if(!game.activeBox)
+				return;
             
             if (event.keyCode !== 37) {
                 return;
@@ -32,14 +35,22 @@
         },
         moveRight: function (event) {
             event = event || window.event;
+			
+			if(!game.activeBox)
+				return
             
             if (event.keyCode !== 39) {
                 return;
             }
             
             game.activeBox.moveRight();
-        }
+        },
+		gameObjectRemoved: function(core, gameObject){
+		 if(game.activeBox.uid === gameObject.uid)
+			game.activeBox = null;
+		},
     };
     
     game.core.eventAggregator.subscribe(game.core.events.start, game.start);
+	game.core.eventAggregator.subscribe(game.core.events.gameObjectRemoved, game.gameObjectRemoved);
     }(this));

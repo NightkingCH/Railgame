@@ -23,9 +23,16 @@
 
         this.start = function () {
             self.lastUpdate = new Date().getTime();
+			
+			self.core.eventAggregator.subscribe(self.core.events.update, self.update);
+			self.core.eventAggregator.subscribe(self.core.events.draw, self.draw);
         };
 
         this.update = function () {
+		
+			if(self.isStopped)
+				return;
+		
             var currentTime = new Date().getTime();
             var diff = currentTime - self.lastUpdate;
 
@@ -85,9 +92,17 @@
         this.random = function (min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         };
-
-        this.core.eventAggregator.subscribe(this.core.events.start, this.start);
-        this.core.eventAggregator.subscribe(this.core.events.update, this.update);
-        this.core.eventAggregator.subscribe(this.core.events.draw, this.draw);
+		
+		this.isStopped = false;
+		
+		this.stop = function(){
+			self.isStopped = true;
+			self.core.eventAggregator.unsubscribe(self.core.events.update, self.update);
+			self.core.eventAggregator.unsubscribe(self.core.events.draw, self.draw);
+						
+			self = null;
+			
+			delete self;			
+		};
     }
 }(this));
