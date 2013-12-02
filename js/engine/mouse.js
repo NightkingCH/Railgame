@@ -3,16 +3,16 @@
 		core: global.core,
 		graphics: global.graphics,
 		currentLastMouseClickPosition: { x: 0.0, y: 0.0 },
-		currentMousePositon: { x: 0.0, y: 0.0 },
+		currentMousePosition: { x: 0.0, y: 0.0 },
 		calcCurrentPosition: function(event){
 			var rect = mouse.graphics.canvas().getBoundingClientRect();
 			
-			currentMousePositon = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+			mouse.currentMousePosition = { x: event.clientX - rect.left, y: event.clientY - rect.top };
 		},
 		calcLastClickPosition: function(event){
 			var rect = mouse.graphics.canvas().getBoundingClientRect();
 			
-			currentLastMouseClickPositon = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+			mouse.currentLastMouseClickPositon = { x: event.clientX - rect.left, y: event.clientY - rect.top };
 		},
 		isMouseDown: false,
 		mouseDown: function(event){
