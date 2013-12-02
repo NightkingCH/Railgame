@@ -13,7 +13,6 @@
         * All possible events
         */
         events: global.gameEvents,
-		mouse: global.mouse,
         exit: false,
         startTime: null,
         frameStartTime: null,
