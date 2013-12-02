@@ -1,6 +1,8 @@
 ﻿//custom amplify.
 //TODO Extend!
 ; (function (global, undefined) {
+    var gameObjects = global.gameObjects = {};
+    
     var core = global.core = {
         animateFrame: window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
