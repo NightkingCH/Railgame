@@ -13,6 +13,7 @@
         * All possible events
         */
         events: global.gameEvents,
+		mouse: global.mouse,
         exit: false,
         startTime: null,
         frameStartTime: null,
@@ -73,5 +74,11 @@
         stop: function () {
             core.exit = true;
         },
+		getInstanceOf: function(ctor){
+			var gameObject =  new ctor();
+			gameObject.start();
+			
+			return gameObject;
+		},
     };
 }(this));

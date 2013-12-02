@@ -18,8 +18,8 @@
             if(event.keyCode !== 77) {
                 return;
             }
-            
-            game.activeBox = new global.gameObjects.Dotter();
+			
+            game.activeBox = game.core.getInstanceOf(global.gameObjects.Dotter);
         },
         moveLeft: function (event) {
             event = event || window.event;
