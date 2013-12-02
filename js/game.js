@@ -19,7 +19,7 @@
                 return;
             }
 			
-            game.activeBox = game.core.getInstanceOf(global.gameObjects.Dotter);
+            game.activeBox = game.core.getInstanceOf(global.gameObjects.Station);
         },
         moveLeft: function (event) {
             event = event || window.event;

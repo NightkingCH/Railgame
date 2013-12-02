@@ -12,7 +12,7 @@
 		calcLastClickPosition: function(event){
 			var rect = mouse.graphics.canvas().getBoundingClientRect();
 			
-			mouse.currentLastMouseClickPositon = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+			mouse.currentLastMouseClickPosition = { x: event.clientX - rect.left, y: event.clientY - rect.top };
 		},
 		isMouseDown: false,
 		mouseDown: function(event){

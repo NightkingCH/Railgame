@@ -1,6 +1,6 @@
 ﻿; (function (global, undefined) {
     var gameObjects = global.gameObjects = {};
-    
+
     var core = global.core = {
         animateFrame: window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
@@ -124,5 +124,18 @@
 				return v.toString(16);
 			});
 		},
+        getGridsize: function(){
+            return {
+                width: 10,
+                height: 10
+            };
+        },
+        getMouseOffset: function(){
+            return {
+                width: 10,
+                height: 10
+            };
+        },
+
     };
 }(this));
