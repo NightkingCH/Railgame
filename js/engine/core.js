@@ -1,6 +1,4 @@
-﻿//custom amplify.
-//TODO Extend!
-; (function (global, undefined) {
+﻿; (function (global, undefined) {
     var gameObjects = global.gameObjects = {};
     
     var core = global.core = {
