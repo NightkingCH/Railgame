@@ -4,7 +4,7 @@
 
 <head>
     <link rel="stylesheet" href="css/style.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
     <script src="js/engine/eventAggregator.js"></script>
     <script src="js/engine/core.js"></script>
     <script src="js/engine/graphics.js"></script>
@@ -14,13 +14,18 @@
 </head>
 
 <body>
+<div id="mousePosi"></div>
 	<div>
 		<button type="button" onclick="game.removeActiveBox();">Remove Me</button>
 	</div>
 	<div>
-		<canvas id="game" width="1024" height="768"></canvas>
+		<canvas id="game" width="1024" height="768" onmousemove="showMousePosition()"></canvas>
 	</div>
     <script>
+        function showMousePosition()
+            {
+                $('#mousePosi').text(window.event.offsetX + "/" + window.event.offsetY);
+            }
         game.run();
     </script>
 </body>
