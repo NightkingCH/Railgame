@@ -84,6 +84,47 @@
 			
 			return gameObject;
 		},
+		getObjectById: function (uid) {
+
+		    if (!uid)
+		        return null;
+
+		    var index = -1;
+
+		    for (var i = 0; i < core.instancedGameObjects.length; ++i) {
+		        if (core.instancedGameObjects[i].uid !== uid)
+		            continue;
+
+		        index = i;
+		        break;
+		    }
+
+		    if (index === -1)
+		        return null;
+
+		    var result = core.instancedGameObjects.splice(index, 1);
+		    
+		    if (result.length <= 0)
+		        return null;
+		    
+		    return result[0];
+		},
+		getObjectsByType: function (type) {
+
+		    if (!type)
+		        return null;
+
+		    var gameObjectsByType = [];
+
+		    for (var i = 0; i < core.instancedGameObjects.length; ++i) {
+		        if (core.instancedGameObjects[i].type !== type)
+		            continue;
+
+		        gameObjectsByType.push(core.instancedGameObjects[i]);
+		    }
+
+		    return gameObjectsByType;
+		},
 		removeGameObject: function(gameObject){
 			if(!gameObject)
 				return false;

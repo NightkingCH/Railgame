@@ -5,6 +5,7 @@
 
         var self = this;
 
+        this.type = "Station"; //used to get all objects of the same type
         this.core = global.core;
 
         this.mouse = global.mouse;

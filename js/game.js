@@ -7,53 +7,22 @@
         },
         start: function () {
             $(document).on('keyup', game.createInstance);
-            $(document).on('keyup', game.moveLeft);
-            $(document).on('keyup', game.moveRight);
         },
-        activeBox: null,
+        activeGameObject: null,
         createInstance: function (event) {
             event = event || window.event;
             
-            //space
+            //m (make)
             if(event.keyCode !== 77) {
                 return;
             }
 			
-            game.activeBox = game.core.getInstanceOf(global.gameObjects.Station);
+            game.activeGameObject = game.core.getInstanceOf(global.gameObjects.City);
+
+            activeGameObject.xPos = 10;
+            activeGameObject.yPos = 20;
         },
-        moveLeft: function (event) {
-            event = event || window.event;
-			
-			if(!game.activeBox)
-				return;
-            
-            if (event.keyCode !== 37) {
-                return;
-            }
-            
-            game.activeBox.moveLeft();
-        },
-        moveRight: function (event) {
-            event = event || window.event;
-			
-			if(!game.activeBox)
-				return
-            
-            if (event.keyCode !== 39) {
-                return;
-            }
-            
-            game.activeBox.moveRight();
-        },
-		gameObjectRemoved: function(core, gameObject){
-		 if(game.activeBox.uid === gameObject.uid)
-			game.activeBox = null;
-		},
-		removeActiveBox: function(){
-			game.core.removeGameObject(game.activeBox);
-		}
     };
     
     game.core.eventAggregator.subscribe(game.core.events.start, game.start);
-	game.core.eventAggregator.subscribe(game.core.events.gameObjectRemoved, game.gameObjectRemoved);
     }(this));
