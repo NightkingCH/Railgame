@@ -1,4 +1,4 @@
-Bahngame
+Railgame
 ========
 
-Ein supertolles Eisenbahn Spiel.
+A super exciting game with trains and rail stations.
