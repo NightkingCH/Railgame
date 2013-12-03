@@ -57,8 +57,3 @@
     game.core.eventAggregator.subscribe(game.core.events.start, game.start);
 	game.core.eventAggregator.subscribe(game.core.events.gameObjectRemoved, game.gameObjectRemoved);
     }(this));
-    
-    function bar()
-    {
-        alert('asd');
-    }
