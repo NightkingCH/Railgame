@@ -4,12 +4,9 @@
     function Station() {
 
         var self = this;
-<<<<<<< HEAD
         
-=======
-
         this.type = "Station"; //used to get all objects of the same type
->>>>>>> cb258aa0d417146262bbdff2482df069efee40e3
+
         this.core = global.core;
         this.mouse = global.mouse;
         this.graphics = global.graphics;
