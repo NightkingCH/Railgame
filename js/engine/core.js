@@ -74,8 +74,9 @@
             core.exit = true;
         },
 		instancedGameObjects: [],
-		getInstanceOf: function(ctor){
-			var gameObject =  new ctor();
+		getInstanceOf: function(ctor, args){
+		    var gameObject = new ctor(args);
+		    
 			gameObject.uid = core.getGuid();
 
 			gameObject.start();
