@@ -39,6 +39,7 @@
             this.passengerInit = false;
             
             this.passengers = [];
+			this.lastUpdate = null;
 
             this.update = function () {
 
@@ -57,27 +58,43 @@
                     self.switch = !self.switch;
                     self.lastDestIndex = 0;
 
-                    var rndPassengers = global.utils.getRandomInt(40, 60);
+                    var rndPassengers = global.utils.getRandomInt(10, 20);
 
                     for (var k = 0; k < rndPassengers; k++) {
-                        self.passengers.push(k);
+                        self.passengers.push(self.core.getInstanceOf(global.gameObjects.Passenger));
                     }
 
                     self.passengerGettingOff = true;
                     self.passengerInit = true;
+					self.lastUpdate = new Date().getTime();
                 }
 
                 if (self.passengerGettingOff) {
                     if (self.passengers.length <= 0) {
                         self.passengerGettingOff = false;
+						
+						return;
                     }
+					
+					var diff = new Date().getTime() - self.lastUpdate;
+					
+					if(diff < 100){
+						return;
+					}
 
                     if (self.passengers.length > 0) {
                         var rndPassengersToRemove = global.utils.getRandomInt(0, self.passengers.length);
 
                         for (var j = 0; j < rndPassengersToRemove; j++) {
-                            self.passengers.splice(0, 1);
+                            var passenger = self.passengers.splice(0, 1)[0];
+							
+							passenger.xPos = self.xPos;
+							passenger.yPos = self.yPos + (self.core.getGridsize().height * self.railRoadCarPosition);
+							
+							passenger.walkOff = true;
                         }
+						
+						self.lastUpdate = new Date().getTime();
 
                         return;
                     }

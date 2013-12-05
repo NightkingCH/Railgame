@@ -11,6 +11,7 @@
     <script src="js/engine/graphics.js"></script>
 	<script src="js/engine/mouse.js"></script>
     <script src="js/logic/station.js"></script>
+	<script src="js/logic/passenger.js"></script>
     <script src="js/logic/railRoadCar.js"></script>
     <script src="js/logic/train.js"></script>
     <script src="js/game.js" type="text/javascript"></script>
@@ -19,10 +20,13 @@
 <body>
 <div id="mousePosi"></div>
 	<div>
-		<button type="button" onclick="game.removeActiveBox();">Remove Me</button>
-	</div>
-	<div>
-		<canvas id="game" width="1024" height="768" onmousemove="showMousePosition()"></canvas>
+	<div id="gameMenu">
+			<button type="button" onclick="game.createTrain();">Create Train</button>
+			<button type="button" onclick="game.createStation();">Create Station</button>
+		</div>
+		<div>
+			<canvas id="game" width="1024" height="768" onmousemove="showMousePosition()"></canvas>
+		</div>		
 	</div>
     <script>
         function showMousePosition()
