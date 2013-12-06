@@ -1,5 +1,6 @@
 ﻿; (function (global, undefined) {
     var gameObjects = global.gameObjects = {};
+	var colliders = global.colliders = {};
 
     var core = global.core = {
         animateFrame: window.requestAnimationFrame ||
@@ -74,10 +75,28 @@
             core.exit = true;
         },
 		instancedGameObjects: [],
+		gameObjectsByLayer:{},
 		getInstanceOf: function(ctor, args){
 		    var gameObject = new ctor(args);
 		    
 			gameObject.uid = core.getGuid();
+			
+			//sorts the object by layer. used for collision detection 
+			if(gameObject.layer){
+				var objectsInLayer = core.gameObjectsByLayer[gameObject.layer];
+				
+				//initial layer array creation
+				if(!objectsInLayer){
+					var layers = [];
+					layers.push(gameObject);
+					core.gameObjectsByLayer[gameObject.layer] = layers;
+				}
+				
+				//direct insert if exists
+				if(objectsInLayer){
+					core.gameObjectsByLayer[gameObject.layer].push(gameObject);
+				}				
+			}
 
 			gameObject.start();
 			
@@ -147,6 +166,15 @@
 				return false;
 				
 			core.instancedGameObjects.splice(index, 1);
+			
+			//remove gameObject from layer
+			for (var x = 0; x < core.gameObjectsByLayer.length; ++x) {
+				if(core.gameObjectsByLayer[x].uid ===  gameObject.uid)
+				{
+					core.gameObjectsByLayer.splice(x, 1);
+					break;
+				}
+			}
 			
 			core.eventAggregator.publish(core.events.gameObjectRemoved, core, gameObject);
 			

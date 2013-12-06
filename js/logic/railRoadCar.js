@@ -7,11 +7,14 @@
 
             this.type = "RailRoadCar"; //used to get all objects of the same type
 			this.layer = 10; //from 1 to 10, 10 top most!
-			
-            this.parentTrain = args && args.train;
+			this.colliders = [];
+            
             this.core = global.core;
             this.mouse = global.mouse;
             this.graphics = global.graphics;
+			
+			this.parentTrain = args && args.train;
+			this.maxRailRoadCars = this.parentTrain.railRoadCarsCount;
 
             this.positionsToDriveAlongFromTo = args && args.positions;
             this.positionsToDriveAlongToFrom = Array.prototype.slice.call(this.positionsToDriveAlongFromTo).reverse();
@@ -19,12 +22,17 @@
             this.positionsToDriveAlong = this.positionsToDriveAlongFromTo;
 
             this.railRoadCarPosition = args && args.railRoadCarPosition;
-            this.railRoadCarSize = { width: Math.round(self.core.getGridsize().width / 2), height: self.core.getGridsize().height };
-
+			
+            this.width = Math.round(self.core.getGridsize().width / 2);
+			this.height = self.core.getGridsize().height;
+			
             this.xPos = 0;
             this.yPos = 0;
 
             this.start = function () {
+			
+                self.colliders.push(self.core.getInstanceOf(global.colliders.BoxCollider, { parent: self }));
+
                 self.core.eventAggregator.subscribe(self.core.events.update, self.update);
                 self.core.eventAggregator.subscribe(self.core.events.draw, self.draw, self.layer);
             };
@@ -104,14 +112,16 @@
                 if (!self.parentTrain.canDrive)
                     return;
 					
-				if (!self.destinationReached && self.xPos == self.destB.x && self.yPos == self.destB.y) {
+				var dif = self.maxRailRoadCars - self.railRoadCarPosition;
+					
+				if (!self.destinationReached && self.xPos == self.destB.x && (self.yPos - (self.core.getGridsize().height * dif))  == self.destB.y) {
 					self.destinationReached = true;
 					
 					return;
                 }
 
                 //this frame we take our position
-                if (self.xPos == self.destB.x && self.yPos == self.destB.y) {
+                if (self.xPos == self.destB.x && (self.yPos - (self.core.getGridsize().height * dif)) == self.destB.y) {
                     //grab first two destinations
                     self.destA = self.positionsToDriveAlong[self.lastDestIndex];
                     self.destB = self.positionsToDriveAlong[self.lastDestIndex + 1];
@@ -165,16 +175,7 @@
             this.drawBoxRectangle = function (context, xPos, yPos) {
                 context.save();
 
-                if (self.railRoadCarPosition === 1) {
-                    context.fillStyle = "#FF0000";
-                }
-                if (self.railRoadCarPosition === 2) {
-                    context.fillStyle = "#00FF00";
-                }
-                if (self.railRoadCarPosition === 3) {
-                    context.fillStyle = "#0000FF";
-                }
-                // context.fillStyle = "#000000";
+				context.fillStyle = "#000000";
 
                 context.fillRect(xPos, yPos, self.parentTrain.railRoadCarSize.width, self.parentTrain.railRoadCarSize.height);
 

@@ -125,6 +125,7 @@
         lateUpdate: "lateUpdate",
         stop: "stop",
 		gameObjectRemoved: "gameObjectRemoved",
+		gameObjectCollisionDetected: "gameObjectCollisionDetected",
     };
 
 }(this));
