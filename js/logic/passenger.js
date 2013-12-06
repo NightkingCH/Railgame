@@ -6,6 +6,7 @@
             var self = this;
 
             this.type = "Passenger"; //used to get all objects of the same type
+			this.layer = 9; //from 1 to 10, 10 top most!
 
             this.core = global.core;
             this.mouse = global.mouse;
@@ -25,7 +26,7 @@
 				self.lastUpdate = new Date().getTime()
 			
                 self.core.eventAggregator.subscribe(self.core.events.update, self.update);
-				self.core.eventAggregator.subscribe(self.core.events.draw, self.draw);
+				self.core.eventAggregator.subscribe(self.core.events.draw, self.draw, self.layer);
             };
 			
 			this.lastUpdate = null;

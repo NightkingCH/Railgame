@@ -6,7 +6,8 @@
             var self = this;
 
             this.type = "RailRoadCar"; //used to get all objects of the same type
-
+			this.layer = 10; //from 1 to 10, 10 top most!
+			
             this.parentTrain = args && args.train;
             this.core = global.core;
             this.mouse = global.mouse;
@@ -25,7 +26,7 @@
 
             this.start = function () {
                 self.core.eventAggregator.subscribe(self.core.events.update, self.update);
-                self.core.eventAggregator.subscribe(self.core.events.draw, self.draw);
+                self.core.eventAggregator.subscribe(self.core.events.draw, self.draw, self.layer);
             };
 
             this.lastDestIndex = 0;
@@ -102,6 +103,12 @@
 
                 if (!self.parentTrain.canDrive)
                     return;
+					
+				if (!self.destinationReached && self.xPos == self.destB.x && self.yPos == self.destB.y) {
+					self.destinationReached = true;
+					
+					return;
+                }
 
                 //this frame we take our position
                 if (self.xPos == self.destB.x && self.yPos == self.destB.y) {
@@ -123,27 +130,30 @@
                 if (self.switch) {
                     if (self.xPos != self.destB.x) {
                         self.xPos += self.core.getGridsize().width;
+						
+						return;
                     }
 
                     if (self.yPos != self.destB.y) {
                         self.yPos += self.core.getGridsize().height;
+						
+						return;
                     }
                 }
 
                 if (!self.switch) {
                     if (self.xPos != self.destB.x) {
                         self.xPos -= self.core.getGridsize().width;
+						
+						return;
                     }
 
                     if (self.yPos != self.destB.y) {
                         self.yPos -= self.core.getGridsize().height;
+						
+						return;
                     }
-                }
-
-                if (self.xPos == self.destB.x && self.yPos == self.destB.y) {
-                    self.destinationReached = true;
-                }
-
+                }				
             };
 
             this.draw = function () {
