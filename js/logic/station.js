@@ -6,7 +6,7 @@
             var self = this;
 
             this.type = "Station"; //used to get all objects of the same type
-			this.layer = 10; //from 1 to 10, 10 top most!
+			this.layer = 9; //from 1 to 10, 10 top most!
 
             this.core = global.core;
             this.mouse = global.mouse;
