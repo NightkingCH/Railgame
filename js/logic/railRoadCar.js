@@ -112,16 +112,16 @@
                 if (!self.parentTrain.canDrive)
                     return;
 					
-				var dif = self.maxRailRoadCars - self.railRoadCarPosition;
+				var dif = ((self.maxRailRoadCars - self.railRoadCarPosition) * self.core.getGridsize().height);
 					
-				if (!self.destinationReached && self.xPos == self.destB.x && (self.yPos - (self.core.getGridsize().height * dif))  == self.destB.y) {
+				if (!self.destinationReached && self.xPos == self.destB.x && (self.yPos - dif)  == self.destB.y) {
 					self.destinationReached = true;
 					
 					return;
                 }
 
                 //this frame we take our position
-                if (self.xPos == self.destB.x && (self.yPos - (self.core.getGridsize().height * dif)) == self.destB.y) {
+                if (self.xPos == self.destB.x && (self.yPos - dif) == self.destB.y) {
                     //grab first two destinations
                     self.destA = self.positionsToDriveAlong[self.lastDestIndex];
                     self.destB = self.positionsToDriveAlong[self.lastDestIndex + 1];
@@ -168,7 +168,7 @@
 
             this.draw = function () {
                 self.graphics.draw(function (context) {
-                    self.drawBoxRectangle(context, self.xPos, self.yPos + (self.core.getGridsize().height * self.railRoadCarPosition));
+                    self.drawBoxRectangle(context, self.xPos, self.yPos + (self.core.getGridsize().height * (self.railRoadCarPosition - 1)));
                 });
             };
 

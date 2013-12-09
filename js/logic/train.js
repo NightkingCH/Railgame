@@ -14,7 +14,7 @@
             this.positionsToDriveAlong = args && args.positions;
 
             this.railRoadCarSize = { width: Math.round(self.core.getGridsize().width / 2), height: self.core.getGridsize().height };
-            this.railRoadCarsCount = 3;
+            this.railRoadCarsCount = 1;
             this.railRoadCars = [];
 
             this.canDrive = true;

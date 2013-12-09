@@ -29,14 +29,14 @@
 			this.isDebug = args.debug ? args.debug : true;
 
             this.start = function () {
-                self.core.eventAggregator.subscribe(self.core.events.update, self.update);
+                self.core.eventAggregator.subscribe(self.core.events.lateUpdate, self.lateUpdate, 1);
 				
 				if(self.isDebug){
 					self.core.eventAggregator.subscribe(self.core.events.draw, self.draw, 1);
 				}
             };
 
-            this.update = function () {
+            this.lateUpdate = function () {
 				self.xPos = self.parent.xPos;
 				self.yPos = self.parent.yPos;
 				self.width = self.parent.width;
@@ -65,7 +65,7 @@
             this.stop = function () {
                 self.isStopped = true;
 
-                self.core.eventAggregator.unsubscribe(self.core.events.update, self.update);
+                self.core.eventAggregator.unsubscribe(self.core.events.lateUpdate, self.lateUpdate);
 
                 self = null;
 

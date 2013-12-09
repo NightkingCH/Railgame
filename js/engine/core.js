@@ -61,10 +61,10 @@
             core.startTime = core.currentTime();
             
             core.eventAggregator.publish(core.events.update, core);
+			core.eventAggregator.publish(core.events.lateUpdate, core);
             core.eventAggregator.publish(core.events.beforeDraw, core);
             core.eventAggregator.publish(core.events.draw, core);
-            core.eventAggregator.publish(core.events.afterDraw, core);
-            core.eventAggregator.publish(core.events.lateUpdate, core);
+            core.eventAggregator.publish(core.events.afterDraw, core);            
             
             core.animateFrame.call(window, core.run); //recursiv loop
         },
